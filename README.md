@@ -1,6 +1,6 @@
-# CloudGuard AI Threat Detection
+# SIH26145: AI-Based Detection of Cyber Threats in Unidirectional IP Traffic
 
-A cloud-integrated front-end + back-end system for ML-based threat detection. It demonstrates: data collection, preprocessing, ML classification, real-time alerting, and persistent reporting.
+A passive network monitoring system. It demonstrates: unidirectional flow data collection, preprocessing, ML classification on metadata without decryption, real-time volumetric alerting, and persistent reporting.
 
 ## Architecture
 

@@ -119,20 +119,17 @@ const TARGETS = {
 let TARGET = TARGETS['aws-us-east-1'];
 
 const EVENT_TEMPLATES = [
-  { type: 'safe',       proto: 'HTTPS', msg: 'Normal HTTPS traffic classified benign',       score: () => rnd(0.01, 0.09) },
-  { type: 'safe',       proto: 'DNS',   msg: 'DNS resolution · benign domain',                score: () => rnd(0.02, 0.07) },
-  { type: 'safe',       proto: 'SSH',   msg: 'Authenticated SSH session · known host',        score: () => rnd(0.03, 0.11) },
-  { type: 'safe',       proto: 'HTTP',  msg: 'CloudTrail API event processed',                score: () => rnd(0.01, 0.05) },
-  { type: 'safe',       proto: 'TLS',   msg: 'Certificate rotation · valid chain',            score: () => rnd(0.01, 0.06) },
-  { type: 'suspicious', proto: 'TCP',   msg: 'Outbound volume spike · data exfil suspected', score: () => rnd(0.75, 0.89) },
-  { type: 'suspicious', proto: 'UDP',   msg: 'Port scan anomaly · 3000+ ports probed',       score: () => rnd(0.71, 0.85) },
-  { type: 'suspicious', proto: 'ICMP',  msg: 'ICMP flood · possible DDoS probe',             score: () => rnd(0.68, 0.82) },
-  { type: 'threat',     proto: 'HTTP',  msg: 'Ransomware C2 beacon detected',                score: () => rnd(0.91, 0.99) },
-  { type: 'threat',     proto: 'SMTP',  msg: 'Phishing payload in mail body',                score: () => rnd(0.88, 0.98) },
-  { type: 'threat',     proto: 'DNS',   msg: 'DNS tunneling · covert channel',               score: () => rnd(0.85, 0.97) },
-  { type: 'threat',     proto: 'RDP',   msg: 'Brute-force login attempt · RDP',              score: () => rnd(0.86, 0.99) },
-  { type: 'threat',     proto: 'SSH',   msg: 'Credential stuffing · 82 failed auths',        score: () => rnd(0.90, 0.99) },
-  { type: 'threat',     proto: 'TLS',   msg: 'Self-signed cert · possible MitM',             score: () => rnd(0.83, 0.95) }
+  { type: 'safe',       proto: 'HTTPS', msg: 'Normal flow rate · benign HTTPS',               score: () => rnd(0.01, 0.09) },
+  { type: 'safe',       proto: 'DNS',   msg: 'Standard DNS query frequency',                  score: () => rnd(0.02, 0.07) },
+  { type: 'safe',       proto: 'TCP',   msg: 'Typical baseline SYN rate observed',            score: () => rnd(0.03, 0.11) },
+  { type: 'suspicious', proto: 'TCP',   msg: 'High SYN arrival rate · possible scan',         score: () => rnd(0.75, 0.89) },
+  { type: 'suspicious', proto: 'UDP',   msg: 'Unidirectional UDP spike · suspicious flow',    score: () => rnd(0.71, 0.85) },
+  { type: 'suspicious', proto: 'ICMP',  msg: 'Elevated ICMP ping volume',                     score: () => rnd(0.68, 0.82) },
+  { type: 'threat',     proto: 'TCP',   msg: 'DDoS Anomaly detected via Volumetric Flow rate',score: () => rnd(0.91, 0.99) },
+  { type: 'threat',     proto: 'TCP',   msg: 'Port Scanning probe identified (Unidirectional)',score: () => rnd(0.88, 0.98) },
+  { type: 'threat',     proto: 'UDP',   msg: 'Suspected C2 Beaconing pattern (frequency)',    score: () => rnd(0.85, 0.97) },
+  { type: 'threat',     proto: 'DNS',   msg: 'DNS Tunneling activity via frequency analysis', score: () => rnd(0.86, 0.99) },
+  { type: 'threat',     proto: 'ICMP',  msg: 'Unidirectional ICMP Flood Attack',             score: () => rnd(0.90, 0.99) }
 ];
 
 const PROTOCOLS = ['HTTPS', 'DNS', 'SSH', 'HTTP', 'TLS', 'TCP', 'UDP', 'SMTP', 'RDP'];
